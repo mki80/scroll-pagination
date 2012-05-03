@@ -1,4 +1,4 @@
-/*global YUI */
+/*global YUI, window */
 /**
  * A widget that makes a page or a division can dynamically load data
  * by mouse scrolling without clicking any links.
@@ -40,6 +40,15 @@ YUI.add("scroll-pagination", function (Y) {
      * @property ATTRS
      */
     ScrollPagination.ATTRS = {
+        /**
+         * An optional attribute.
+         * If this is being set, it will be the ancestor node to append indicator.
+         *
+         * @attribute container
+         */
+        "container": {
+            value: null
+        },
         /**
          * Distance below the fold for which data starts to load.
          * Data doesn't start to load until the indicator is at
@@ -240,7 +249,7 @@ YUI.add("scroll-pagination", function (Y) {
             } else {
                 posScroll = self.get("node").get("scrollHeight") + self.get("node").get("scrollTop");
             }
-            posLoad  = node.get("region")["bottom"] - self.get("foldDistance");
+            posLoad  = node.get("region").bottom - self.get("foldDistance");
             needLoad = (posScroll > posLoad);
             if (!needLoad) {
                 return;
@@ -287,9 +296,10 @@ YUI.add("scroll-pagination", function (Y) {
                         Y.log("Error - " + e.error.message, "error", MODULE_ID);
                     }
                 }
-            })
+            });
         },
         destructor: function () {
+            var self = this;
             Y.each(self._handlers, function (handler) {
                 handler.detach();
             });
@@ -303,9 +313,11 @@ YUI.add("scroll-pagination", function (Y) {
         initializer: function (config) {
             Y.log("initializer() is executed.", "info", MODULE_ID);
             var self = this,
+                container,
                 node;
 
             node = config.node || window;
+            container = config.container || null;
 
             if (config.data) {
                 self.set("data", config.data);
@@ -327,8 +339,9 @@ YUI.add("scroll-pagination", function (Y) {
             }
 
             // Render UI.
-            if (!node.one(INDICATOR_SELECTOR)) {
-                node.append(self.INDICATOR_TEMPLATE);
+            container = container || node;
+            if (!container.one(INDICATOR_SELECTOR)) {
+                container.append(self.INDICATOR_TEMPLATE);
             }
 
             // Manually load from server when you set autoLoad = false.
