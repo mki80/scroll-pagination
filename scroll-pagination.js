@@ -92,11 +92,13 @@ YUI.add("scroll-pagination", function (Y) {
             value: true,
             validator: Y.Lang.isBoolean,
             setter: function (value) {
-                Y.log("autoLoad setter = " + value);
-                if (!value) {
-                    Y.one(INDICATOR_SELECTOR).setContent("<a href=\"javascript:void(0);\" class=\"more-link\">More...</a>");
-                    Y.one(INDICATOR_SELECTOR).addClass(CLICK_CLASSNAME);
+                if (value) {
+                    return value;
                 }
+                Y.log("The setter of autoLoad attribute is invoked.", "info", MODULE_ID);
+                var node = Y.one(INDICATOR_SELECTOR);
+                node.setContent("<a href=\"javascript:void(0);\" class=\"more-link\">More...</a>");
+                node.addClass(CLICK_CLASSNAME);
                 return value;
             }
         },
@@ -111,16 +113,16 @@ YUI.add("scroll-pagination", function (Y) {
             value: false,
             validator: Y.Lang.isBoolean,
             setter: function (value) {
-                Y.log("isEnd setter = " + value);
-                if (value) {
-                    Y.one(INDICATOR_SELECTOR).removeClass(CLICK_CLASSNAME);
-                    Y.one(INDICATOR_SELECTOR).addClass(FINISH_CLASSNAME);
-                    Y.one(INDICATOR_SELECTOR).setContent(self.NO_DATA_TEMPLATE);
-                    this._set("autoLoad", false);
-                    Y.each(self._handlers, function (handler) {
-                        handler.detach();
-                    });
+                if (!value) {
+                    return value;
                 }
+                Y.log("The setter of isEnd attribute is invoked.", "info", MODULE_ID);
+                var self = this,
+                    node = Y.one(INDICATOR_SELECTOR);
+                self._set("autoLoad", false);
+                node.removeClass(CLICK_CLASSNAME);
+                node.addClass(FINISH_CLASSNAME);
+                node.setContent(self.NO_DATA_TEMPLATE);
                 return value;
             }
         },
@@ -347,6 +349,7 @@ YUI.add("scroll-pagination", function (Y) {
 
             // Initial checking.
             self._scrollHandler.call(self);
+
         }
     });
 
@@ -354,4 +357,4 @@ YUI.add("scroll-pagination", function (Y) {
     Y.ScrollPagination = ScrollPagination;
 
 
-}, "0.0.1", {"requires": ["base", "node-base", "node-screen", "event-resize", "node-event-delegate"]});
+}, "0.0.1", {"requires": ["base", "node-base", "node-screen", "event-resize", "node-event-delegate", "datasource-io", "datasource-jsonschema"]});

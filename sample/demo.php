@@ -7,6 +7,7 @@
 <title>Scroll Pagination</title>
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.5.0/build/cssreset/reset-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.5.0/build/cssfonts/fonts-min.css">
+<link rel="stylesheet" href="../assets/scroll-pagination.css">
 <script type="text/javascript" src="http://yui.yahooapis.com/3.5.0/build/yui/yui-min.js"></script>
 <script type="text/javascript" src="../scroll-pagination.js"></script>
 <style type="text/css">
@@ -14,24 +15,6 @@
     height: 98px;
     border: solid 1px #ccc;
     border-width: 1px 0;
-}
-.yui3-scroll-pagination-indicator {
-    visibility: hidden;
-}
-div.yui3-scroll-pagination-loading {
-    padding: 10px 10px 10px 30px;
-    background: yellow;
-    visibility: visible;
-}
-.yui3-scroll-pagination-click {
-    padding: 10px 10px 10px 30px;
-    background: pink;
-    visibility: visible;
-}
-.yui3-scroll-pagination-end {
-    padding: 10px 10px 10px 30px;
-    background: #ccc;
-    visibility: visible;
 }
 </style>
 </head>
@@ -42,7 +25,7 @@ div.yui3-scroll-pagination-loading {
 <?php endfor; ?>
     </div>
     <script>
-    YUI().use("json-parse", "scroll-pagination", "datasource-io", "datasource-jsonschema", function (Y) {
+    YUI().use("scroll-pagination", function (Y) {
 
         var scroll = new Y.ScrollPagination({
             foldDistance: 500,
@@ -80,9 +63,9 @@ div.yui3-scroll-pagination-loading {
                     "&page=" + page
                 ].join(""));
                 Y.one("#foo").append(data.html);
-                //if (page >= 5) {
-                    //self.set("autoLoad", false);
-                //}
+                if (page >= 5) {
+                    self.set("autoLoad", false);
+                }
             }
 
         })

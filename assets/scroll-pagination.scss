@@ -1,0 +1,18 @@
+.yui3-scroll-pagination-indicator {
+    visibility: hidden;
+}
+div.yui3-scroll-pagination-loading {
+    padding: 10px 10px 10px 30px;
+    background: yellow;
+    visibility: visible;
+}
+.yui3-scroll-pagination-click {
+    padding: 10px 10px 10px 30px;
+    background: pink;
+    visibility: visible;
+}
+.yui3-scroll-pagination-end {
+    padding: 10px 10px 10px 30px;
+    background: #ccc;
+    visibility: visible;
+}
