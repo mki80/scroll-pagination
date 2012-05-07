@@ -106,7 +106,7 @@ YUI.add("scroll-pagination", function (Y) {
                 }
                 Y.log("The setter of autoLoad attribute is invoked.", "info", MODULE_ID);
                 var node = Y.one(INDICATOR_SELECTOR);
-                node.setContent("<a href=\"javascript:void(0);\" class=\"more-link\">More...</a>");
+                node.setContent("<a href=\"javascript:void(0);\" class=\"more-link\">Show more notifications</a>");
                 node.addClass(CLICK_CLASSNAME);
                 return value;
             }
@@ -200,14 +200,14 @@ YUI.add("scroll-pagination", function (Y) {
          * @property MORE_LINK_TEMPLATE
          * @public
          */
-        MORE_LINK_TEMPLATE: "<a href=\"javascript:void(0);\" class=\"more-link\">More...</a>",
+        MORE_LINK_TEMPLATE: "<a href=\"javascript:void(0);\" class=\"more-link\">Show more notifications</a>",
         /**
          * @property INDICATOR_TEMPLATE
          * @public
          */
         INDICATOR_TEMPLATE: [
             "<div class=\"" + INDICATOR_CLASSNAME + "\">",
-                "<a href=\"javascript:void(0);\">Click to load more data...</a>",
+                "<a href=\"javascript:void(0);\" class=\"more-link\">Show more notifications</a>",
             "</div>"
         ].join(""),
         /**

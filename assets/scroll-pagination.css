@@ -1,18 +1,34 @@
 .yui3-scroll-pagination-indicator {
+    background: #fff;
+    color: #787878;
+    text-align: center;
+    margin: 0 0 35px;
+    margin-right: 20px;
     visibility: hidden;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
 }
+.yui3-scroll-pagination-indicator p, .yui3-scroll-pagination-indicator .more-link {
+    display: block;
+    padding: 5px 0;
+}
+
 div.yui3-scroll-pagination-loading {
-    padding: 10px 10px 10px 30px;
-    background: yellow;
     visibility: visible;
 }
+
 .yui3-scroll-pagination-click {
-    padding: 10px 10px 10px 30px;
-    background: pink;
     visibility: visible;
 }
+.yui3-scroll-pagination-click .more-link:hover {
+    background: #daf0f0;
+    color: #0bb;
+}
+
 .yui3-scroll-pagination-end {
-    padding: 10px 10px 10px 30px;
-    background: #ccc;
-    visibility: visible;
+    display: none;
 }

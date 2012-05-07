@@ -1,18 +1,29 @@
+@import "compass";
+
 .yui3-scroll-pagination-indicator {
+    background: #fff;
+    color: #787878;
+    // margin: -12px 10px 35px 0;
+    text-align: center;
+    margin: 0 0 35px;
+    margin-right: 20px;
     visibility: hidden;
+    @include border-radius(5px);
+    p, .more-link {
+        display: block;
+        padding: 5px 0;
+    }
 }
 div.yui3-scroll-pagination-loading {
-    padding: 10px 10px 10px 30px;
-    background: yellow;
     visibility: visible;
 }
 .yui3-scroll-pagination-click {
-    padding: 10px 10px 10px 30px;
-    background: pink;
     visibility: visible;
+    .more-link:hover {
+        background: #daf0f0;
+        color: #0bb;
+    }
 }
 .yui3-scroll-pagination-end {
-    padding: 10px 10px 10px 30px;
-    background: #ccc;
-    visibility: visible;
+    display: none;
 }
