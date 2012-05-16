@@ -1,0 +1,245 @@
+{
+    "project": {},
+    "files": {
+        "scroll-pagination.js": {
+            "name": "scroll-pagination.js",
+            "modules": {
+                "scroll-pagination": 1
+            },
+            "classes": {
+                "ScrollPagination": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "scroll-pagination": {
+            "name": "scroll-pagination",
+            "submodules": {},
+            "classes": {
+                "ScrollPagination": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "scroll-pagination.js",
+            "line": 20,
+            "description": "A widget that makes a page or a division can dynamically load data\nby mouse scrolling without clicking any links.\nIt has various namings such as Continuous Scrolling, Infinite Scroll,\nand the name we use, Scroll Pagination.",
+            "requires": [
+                "base"
+            ]
+        }
+    },
+    "classes": {
+        "ScrollPagination": {
+            "name": "ScrollPagination",
+            "shortname": "ScrollPagination",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "scroll-pagination",
+            "namespace": "",
+            "file": "scroll-pagination.js",
+            "line": 20,
+            "description": "A widget that makes a page or division can dynamically load data\nby scrolling mouse wheel without clicking any links.\nThe UI pattern has varied namings such as Continuous Scrolling,\nInfinite Scroll, and Scroll Pagination.\n\n    _scroll = new Y.ScrollPagination({\n        container: _node.one(\".bd\"),\n        foldDistance: 500,\n        delay: 1000,\n        data: {\n            source: \"/welcome/q/get_notification_list?format=html\",\n            schema: {\n                metaFields: {\n                    last_id: \"last_id\",\n                    last_ts: \"last_ts\",\n                    html   : \"html\"\n                }\n            },\n            request: [\n                \"&last_id=\" + _node.one(\"#last_id\").get(\"value\"),\n                \"&last_ts=\" + _node.one(\"#last_ts\").get(\"value\"),\n                \"&r=\" + parseInt(new Date().getTime(), 10)\n            ].join(\"\")\n        }\n    });\n    _scroll.on(\"load\", _loadHandler);",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "config",
+                    "description": "attribute object",
+                    "type": "Object"
+                }
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "scroll-pagination.js",
+            "line": 56,
+            "itemtype": "property",
+            "name": "NAME",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 61,
+            "itemtype": "property",
+            "name": "ATTRS",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 65,
+            "description": "An optional attribute.\nDefault we use body as container.\nIf this is being set, it will be the ancestor node to append UI.",
+            "itemtype": "attribute",
+            "name": "container",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 75,
+            "description": "Distance below the fold for which data starts to load.\nData doesn't start to load until the indicator is at\nmost this distance away from (or above) the fold.",
+            "itemtype": "attribute",
+            "name": "foldDistance",
+            "type": "{Number}",
+            "default": "100",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 88,
+            "description": "The indicator shows loading immediately when user\nscrolls to the region. However, we delayed this time\nsending to server to avoid the performance issue\nwhen user scrolls faster than data loading.",
+            "itemtype": "attribute",
+            "name": "delay",
+            "type": "{Number}",
+            "default": "500",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 102,
+            "description": "The scrolling region.\nYou may use window as scrolling region,\nbut show control UI in another node. (container attribute helps.)",
+            "itemtype": "attribute",
+            "name": "node",
+            "type": "{Y.Node|String|HTML Element}",
+            "default": "window",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 115,
+            "description": "Set the autoLoad attribute to false and the UI will\nshows 'more' link. In our scenario we only want\nuser has scrolling loading for 5 times.\nTo achieve this, set this value during instance level.",
+            "itemtype": "attribute",
+            "name": "autoLoad",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 139,
+            "description": "Set this value if you want stop loading data from server.",
+            "itemtype": "attribute",
+            "name": "isEnd",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 163,
+            "description": "A required attribute which helps this widget to set\nY.DataSource.IO instance for you to load data.\nCurrently this widget only support AJAX with JSON data.\nCheck YUI DataSource to get more information.\n\n    data: {\n        source: \"ajax.php\",\n        schema: {\n            metaFields: {\n                count: \"result.count\",\n                last_id: \"result.last_id\",\n                last_timestamp: \"result.last_timestamp\",\n                html: \"result.html\"\n            }\n        },\n        request: \"?page=1&r=\" + parseInt(new Date().getTime(), 10)\n    }",
+            "itemtype": "attribute",
+            "name": "data",
+            "type": "{Object}",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 213,
+            "itemtype": "property",
+            "name": "LOADING_TEMPLATE",
+            "access": "public",
+            "tagname": "",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 218,
+            "itemtype": "property",
+            "name": "NO_DATA_TEMPLATE",
+            "access": "public",
+            "tagname": "",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 223,
+            "itemtype": "property",
+            "name": "MORE_LINK_TEMPLATE",
+            "access": "public",
+            "tagname": "",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 228,
+            "itemtype": "property",
+            "name": "INDICATOR_TEMPLATE",
+            "access": "public",
+            "tagname": "",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 237,
+            "description": "The Y.DataSource.IO instance runs inside.",
+            "itemtype": "property",
+            "name": "_dataSource",
+            "access": "private",
+            "tagname": "",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 245,
+            "description": "The flag to check whether it still processes loading.",
+            "itemtype": "property",
+            "name": "_isLock",
+            "access": "private",
+            "tagname": "",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 252,
+            "description": "Handles when user has page scrolling.\nIt decides whether or not to load data from server.",
+            "itemtype": "event",
+            "name": "_scrollHandler",
+            "access": "private",
+            "tagname": "",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 296,
+            "description": "Make request to server.\nIt triggers load event when we make request successfully.",
+            "itemtype": "method",
+            "name": "_makeRequest",
+            "access": "private",
+            "tagname": "",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        },
+        {
+            "file": "scroll-pagination.js",
+            "line": 331,
+            "description": "It will be invoked after user instanitate a instance.",
+            "itemtype": "method",
+            "name": "initializer",
+            "access": "public",
+            "tagname": "",
+            "class": "ScrollPagination",
+            "module": "scroll-pagination"
+        }
+    ]
+}
