@@ -226,17 +226,41 @@ YUI.add("scroll-pagination", function (Y) {
          */
         _isLock: false,
         /**
-         * Handles when user has page scrolling.
-         * It decides whether or not to load data from server.
+         * Load new data from server.
          *
-         * @event _scrollHandler
+         * @method _load
          * @private
          */
-        _scrollHandler: function () {
-            if (this._isLock || !this.get("autoLoad")) {
+        _load: function () {
+            Y.log("_load() is executed.", "info", MODULE_ID);
+            var self = this,
+                node;
+
+            if (!self.get("data")) {
+                Y.log("_scrollHandler() - Oops! You must define the 'data' attribute.");
                 return;
             }
-            Y.log("scrollHandler() is executed.", "info", MODULE_ID);
+
+            node = Y.one(INDICATOR_SELECTOR);
+            node.removeClass(CLICK_CLASSNAME);
+            node.addClass(LOADING_CLASSNAME);
+            node.setContent(self.LOADING_TEMPLATE);
+            if (self.get("delay")) {
+                Y.later(self.get("delay"), self, self._makeRequest);
+            } else {
+                self._makeRequest();
+            }
+            self._isLock = true;
+        },
+        /**
+         * Check if we need to have to load.
+         *
+         * @method _needLoad
+         * @private
+         * @return
+         */
+        _needLoad: function () {
+            Y.log("_needLoad() is executed.", "info", MODULE_ID);
             var self = this,
                 node,
                 posScroll,
@@ -251,22 +275,30 @@ YUI.add("scroll-pagination", function (Y) {
             }
             posLoad  = node.get("region").bottom - self.get("foldDistance");
             needLoad = (posScroll > posLoad);
-            if (!needLoad) {
+            return needLoad;
+        },
+        /**
+         * Handles when user has page scrolling.
+         * It decides whether or not to load data from server.
+         *
+         * @event _scrollHandler
+         * @private
+         */
+        _scrollHandler: function () {
+            if (this._isLock || !this.get("autoLoad")) {
                 return;
             }
-            if (!self.get("data")) {
-                Y.log("_scrollHandler() - Oops! You must define the 'data' attribute.");
+            Y.log("scrollHandler() is executed.", "info", MODULE_ID);
+            var self = this,
+                node;
+
+            node = Y.one(INDICATOR_SELECTOR);
+            if (!self._needLoad()) {
                 return;
             }
-            node.removeClass(CLICK_CLASSNAME);
-            node.addClass(LOADING_CLASSNAME);
-            node.setContent(self.LOADING_TEMPLATE);
-            if (self.get("delay")) {
-                Y.later(self.get("delay"), self, self._makeRequest);
-            } else {
-                self._makeRequest();
-            }
-            self._isLock = true;
+
+            self._load();
+
 
         },
         /**
@@ -289,6 +321,8 @@ YUI.add("scroll-pagination", function (Y) {
                         if (!self.get("autoLoad") && !self.get("isEnd")) {
                             Y.one(INDICATOR_SELECTOR).setContent(self.MORE_LINK_TEMPLATE);
                             Y.one(INDICATOR_SELECTOR).addClass(CLICK_CLASSNAME);
+                        } else {
+                            self.sync();
                         }
                     },
                     failure: function (e) {
@@ -297,6 +331,20 @@ YUI.add("scroll-pagination", function (Y) {
                     }
                 }
             });
+        },
+        /**
+         * It triggers _scrollHandler without really scroll
+         * It helps users to sync UI.
+         *
+         * @method sync
+         * @public
+         */
+        sync: function () {
+            Y.log("sync() is executed.", "info", MODULE_ID);
+            var self = this;
+            if (self._needLoad()) {
+                self._load();
+            }
         },
         destructor: function () {
             var self = this;
@@ -361,7 +409,7 @@ YUI.add("scroll-pagination", function (Y) {
             }, "a.more-link", self));
 
             // Initial checking.
-            self._scrollHandler.call(self);
+            self.sync();
 
         }
     });
