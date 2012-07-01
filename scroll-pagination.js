@@ -275,6 +275,7 @@ YUI.add("scroll-pagination", function (Y) {
             }
             posLoad  = node.get("region").bottom - self.get("foldDistance");
             needLoad = (posScroll > posLoad);
+            needLoad =  (needLoad && self.get("autoLoad")) ? true : false;
             return needLoad;
         },
         /**
@@ -342,7 +343,7 @@ YUI.add("scroll-pagination", function (Y) {
         sync: function () {
             Y.log("sync() is executed.", "info", MODULE_ID);
             var self = this;
-            if (self._needLoad()) {
+            if (self._needLoad() && !self._isLock) {
                 self._load();
             }
         },
