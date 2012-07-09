@@ -154,7 +154,7 @@ YUI.add("scroll-pagination", function (Y) {
          *         request: "?page=1&r=" + parseInt(new Date().getTime(), 10)
          *     }
          *
-         * @attribute isEnd
+         * @attribute data
          * @type {Boolean}
          * @default false
          */
@@ -316,6 +316,11 @@ YUI.add("scroll-pagination", function (Y) {
                 request: self._request,
                 callback: {
                     success: function (o) {
+                        /**
+                         * It fires when data is successfully loaded from server.
+                         *
+                         * @event load
+                         */
                         self.fire("load", o.response);
                         self._isLock = false;
                         Y.one(INDICATOR_SELECTOR).removeClass(LOADING_CLASSNAME);
@@ -327,6 +332,11 @@ YUI.add("scroll-pagination", function (Y) {
                         }
                     },
                     failure: function (e) {
+                        /**
+                         * It fires when data is fails loading from server.
+                         *
+                         * @event fail
+                         */
                         self.fire("fail", e.error);
                         Y.log("Error - " + e.error.message, "error", MODULE_ID);
                     }
