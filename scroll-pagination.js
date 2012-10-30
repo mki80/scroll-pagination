@@ -27,7 +27,7 @@ YUI.add("scroll-pagination", function (Y) {
      * @class ScrollPagination
      * @param {Object} config attribute object
      */
-    function ScrollPagination (config) {
+    function ScrollPagination(config) {
         ScrollPagination.superclass.constructor.apply(this, arguments);
     }
 
@@ -174,10 +174,7 @@ YUI.add("scroll-pagination", function (Y) {
                 if (!Y.Lang.isObject(value)) {
                     return false;
                 }
-                if (
-                    Y.Lang.isUndefined(value.schema) ||
-                    Y.Lang.isUndefined(value.source)
-                ) {
+                if (Y.Lang.isUndefined(value.schema) || Y.Lang.isUndefined(value.source)) {
                     return false;
                 }
                 return true;
@@ -207,7 +204,7 @@ YUI.add("scroll-pagination", function (Y) {
          */
         INDICATOR_TEMPLATE: [
             "<div class=\"" + INDICATOR_CLASSNAME + "\">",
-                "<a href=\"javascript:void(0);\" class=\"more-link\">Show more notifications</a>",
+            "    <a href=\"javascript:void(0);\" class=\"more-link\">Show more notifications</a>",
             "</div>"
         ].join(""),
         /**
@@ -428,5 +425,16 @@ YUI.add("scroll-pagination", function (Y) {
     // Promote to YUI environment.
     Y.ScrollPagination = ScrollPagination;
 
-
-}, "0.0.1", {"requires": ["base", "node-base", "node-screen", "event-resize", "node-event-delegate", "datasource-io", "datasource-jsonschema"]});
+}, "0.0.1", {
+    "group"    : "mui",
+    "js"       : "scroll-pagination/scroll-pagination.js",
+    "requires" : [
+        "base",
+        "node-base",
+        "node-screen",
+        "event-resize",
+        "node-event-delegate",
+        "datasource-io",
+        "datasource-jsonschema"
+    ]
+});
