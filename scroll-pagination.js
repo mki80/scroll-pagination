@@ -106,7 +106,7 @@ YUI.add("scroll-pagination", function (Y) {
                 }
                 Y.log("The setter of autoLoad attribute is invoked.", "info", MODULE_ID);
                 var node = Y.one(INDICATOR_SELECTOR);
-                node.setContent("<a href=\"javascript:void(0);\" class=\"more-link\">Show more notifications</a>");
+                node.setContent(self.MORE_LINK_TEMPLATE);
                 node.addClass(CLICK_CLASSNAME);
                 return value;
             }
